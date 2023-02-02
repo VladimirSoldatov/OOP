@@ -1,9 +1,10 @@
 #include "ShopService.h"
 
-ShopService::ShopService()
+ShopService::ShopService(string _nameOrganization)
 {
 	shop = Shop();
-	service = ShopService();
+	service = Service();
+	nameOrganization = _nameOrganization;
 }
 
 void ShopService::visit_client(int type_of_visit, string clientName)

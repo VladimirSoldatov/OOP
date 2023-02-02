@@ -13,8 +13,9 @@ class ShopService :public Shop, public Service
 	vector<Employer> employers;
 	Shop shop;
 	Service service;
+	string nameOrganization;
 public:
-	ShopService();
+	ShopService(string _nameOrganization);
 	void visit_client(int type_of_visit, string clientName);
 		
 };

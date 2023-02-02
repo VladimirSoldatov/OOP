@@ -1,7 +1,15 @@
 #pragma once
-class Employer
+#include "Human.h"
+
+class Employer:Human
 {
+	
+	int position;
+	int department;
 public:
-	Employer();
+	Employer(string _last_name, string _middle_name, string _first_name, int _age, int _department,
+	int position);
+	void setPosition(int _position);
+	void setPosition(int _position, int _department);
 };
 
