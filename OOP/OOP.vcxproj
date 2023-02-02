@@ -147,6 +147,10 @@
     <ClInclude Include="ShopService.h" />
     <ClInclude Include="Works.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Goods.txt" />
+    <Text Include="Text.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
