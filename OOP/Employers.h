@@ -11,6 +11,6 @@ public:
 	int position);
 	void setPosition(int _position);
 	void setPosition(int _position, int _department);
-	void sayYourName() override;
+	void sayYourName(string name) override;
 };
 

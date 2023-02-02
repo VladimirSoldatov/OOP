@@ -57,6 +57,7 @@ void Shop::setup_goods(string file_path)
 		if (!flag)
 			goods.push_back(Item(name, price, quantity));*/
 	}
+	file.close();
 }
 
 void Shop::setup_goods(Item item)
@@ -79,6 +80,7 @@ void Shop::get_summary()
 
 void Shop::EnterClient(string clientName)
 {
+	
 	Entrance tmp(clientName);
 	//Логика работы с клиентом.
 	entrances.push_back(tmp);

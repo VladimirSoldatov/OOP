@@ -42,6 +42,6 @@ void Employer::setPosition(int _position, int _department)
 void Employer::sayYourName()
 {
 	std::cout << "Hello! ";
-	Employer::sayYourName();
-	std::cout << "Glad to see you in ";
+	Human::sayYourName();
+	std::cout << "Glad to see you in \n";
 }

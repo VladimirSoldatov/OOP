@@ -38,9 +38,23 @@ ShopService::ShopService(string _nameOrganization)
 void ShopService::visit_client(int type_of_visit, string clientName)
 {
 	if (type_of_visit)
+	{
 		service.EnterClient(clientName);
+		for (auto man : employers)
+		{
+			man.sayYourName();
+		}
+	}
 	else
+	{
 		shop.EnterClient(clientName);
+		for (auto man : employers)
+		{
+			man.sayYourName();
+		}
+
+	}
+		
 
 
 }
