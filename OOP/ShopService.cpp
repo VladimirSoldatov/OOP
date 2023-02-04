@@ -42,7 +42,7 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 		service.EnterClient(clientName);
 		for (auto man : employers)
 		{
-			man.sayYourName();
+			man.sayYourName(nameOrganization);
 		}
 	}
 	else
@@ -50,7 +50,7 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 		shop.EnterClient(clientName);
 		for (auto man : employers)
 		{
-			man.sayYourName();
+			man.sayYourName(nameOrganization);
 		}
 
 	}

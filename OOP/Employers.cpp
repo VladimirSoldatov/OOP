@@ -39,9 +39,9 @@ void Employer::setPosition(int _position, int _department)
 	department = _department;
 }
 
-void Employer::sayYourName()
+void Employer::sayYourName(string orgName) 
 {
 	std::cout << "Hello! ";
-	Human::sayYourName();
-	std::cout << "Glad to see you in \n";
+	Human::sayYourName(orgName);
+	std::cout << "Glad to see you in \""<<orgName<<"\"\n";
 }

@@ -1,7 +1,7 @@
 #include<iostream>
 #include "Shop.h"
 #include "Items.h"
-#include"Entrances.h";
+#include"Entrances.h"
 #include<fstream>
 #include<string>
 
