@@ -4,10 +4,11 @@
 #include"Works.h"
 #include"Entrances.h"
 
+// Второй этап. Создание класса Сервис для продажи ремонтных работ и деталей
 class Service
 {
-	vector<Entrance> entrances;
-	vector<Item> repairItems;
+	vector<Entrance> entrances; //Списко посещеий клиента
+	vector<Item> repairItems; // Список работ
 	vector<Work> ourWorks;
 public:
 	Service();
