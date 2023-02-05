@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 using namespace std;
-class Item
+
+// Этап третий
+class Item // Класс деталей
 {
 	string name;
 	float price;
@@ -11,7 +13,7 @@ public:
 	void add_quantity(int _value);
 	void delete_quantity(int _value);
 	string Name();
-	int& Quantity();
+	int& Quantity(); 
 	
 	float& Price();
 

@@ -10,7 +10,8 @@ class Human
 public:
 	Human();
 	Human(string _last_name, string _middle_name, string _first_name, int _age);
-	virtual  void sayYourName(string name);
+	virtual  void sayYourName(string something);
+	void sayYourName();
 
 };
 

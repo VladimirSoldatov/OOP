@@ -8,10 +8,10 @@
 class Service
 {
 	vector<Entrance> entrances; //Списко посещеий клиента
-	vector<Item> repairItems; // Список работ
-	vector<Work> ourWorks;
+	vector<Item> repairItems; // Список деталей
+	vector<Work> ourWorks; // Список работ
 public:
-	Service();
+	Service();// Конструктор по умолчанию
 	void EnterClient(string clientName);
 
 };
