@@ -5,7 +5,7 @@ Human::Human() :first_name{}, last_name{}, middle_name{}, age{}// базовый класс 
 {
 }
 
-Human::Human(string _last_name, string _middle_name, string _first_name, int _age): //Консутрутор человека
+Human::Human(string _last_name, string _first_name, string _middle_name, int _age): //Консутрутор человека
 	last_name{ _last_name }, middle_name{ _middle_name }, first_name{_first_name},
 	age{_age}
 {

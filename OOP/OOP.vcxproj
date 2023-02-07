@@ -149,7 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Goods.txt" />
-    <Text Include="Text.txt" />
+    <Text Include="Employers.txt" />
+    <Text Include="LastID.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

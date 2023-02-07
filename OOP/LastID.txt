@@ -1,0 +1,3 @@
+LastGoodsID 2
+LastEmployerID 3
+LastWorkID 0

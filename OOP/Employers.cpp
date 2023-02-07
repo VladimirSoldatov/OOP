@@ -21,11 +21,32 @@ enum Positions
 	Administrator
 };// Перечисление должностей
 
-Employer::Employer(string _last_name, string _middle_name, string _first_name,
-	int _age, int _department, int _position):
-	Human(_last_name, _middle_name, _first_name, _age), department{_department},
-	position{_position}
+void Employer::set_ID()
 {
+	ID = IDs;
+}
+
+void Employer::GenIDs()
+{
+	IDs++;
+}
+
+int Employer::IDs = 0;
+void Employer::SetEmployerIDs(int ID)
+{
+	IDs = ID;
+}
+Employer::Employer(int _ID, string _last_name,  string _first_name, string _middle_name,
+	int _age, int _department, int _position, bool _status) :ID{_ID},
+	Human(_last_name, _first_name, _middle_name, _age), department{_department},
+	position{ _position }, status{_status}
+{
+	if (_ID == 0)
+	{
+		GenIDs();
+		set_ID();
+		ID = IDs;
+	}
 } //Конструктор создания сотрудника
 
 void Employer::setPosition(int _position) //Смена должности в рамках одного отдела
@@ -45,3 +66,5 @@ void Employer::sayYourName(string orgName) // Предствиться
 	Human::sayYourName(orgName);
 	std::cout << "Glad to see you in \""<<orgName<<"\"\n";
 }
+
+

@@ -16,9 +16,14 @@ class ShopService :public Shop, public Service
 	string nameOrganization;
 public:
 	void create_employers(string path_file,string _nameOrganization);
+	void getlastIDEmployers(string path_file);
 	ShopService(string _nameOrganization);
 	void visit_client(int type_of_visit, string clientName);
 	string getName() { return nameOrganization; }
+	void addNewEmployer(string _lName,
+		string _fName, string _mName, int _age
+		, int _departament, int _position, bool _status = true);
+	void get_out_employers();
 		
 };
 

@@ -9,7 +9,7 @@
 Shop::Shop()
 {
 	goods = vector<Item>();
-	setup_goods("Goods.txt"); // При сздании объекта класса Shop принимаем список товаров для продажи
+	setup_goods("Goods.txt"); // При создании объекта класса Shop принимаем список товаров для продажи
 }
 
 void Shop::setup_goods(string name, float price, int quantity) // примитивная функция для добавления одной позиции товара
