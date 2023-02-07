@@ -92,3 +92,14 @@ void ShopService::get_out_employers()
 {
 }
 
+void ShopService::saveEmployers()
+{
+	fstream file("Employers.txt", ios_base::out);
+	for (auto emp : employers)
+	{
+		//printf("%d %s %s %s %d %d %d %d")
+		file << printf("%d %s %s %s %d %d %d %d"
+			, emp.ID, emp.)
+	}
+}
+

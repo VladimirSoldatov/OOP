@@ -23,7 +23,8 @@ public:
 	void addNewEmployer(string _lName,
 		string _fName, string _mName, int _age
 		, int _departament, int _position, bool _status = true);
+
 	void get_out_employers();
-		
+	void saveEmployers();
 };
 
