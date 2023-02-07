@@ -12,6 +12,10 @@ public:
 	Human(string _last_name, string _middle_name, string _first_name, int _age);
 	virtual  void sayYourName(string something);
 	void sayYourName();
+	string fName(); 
+	string mName();
+	string lName(); 
+	int Age();
 
 };
 

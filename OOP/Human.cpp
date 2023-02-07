@@ -21,3 +21,23 @@ void Human::sayYourName()
 {
 	std::cout << "My name is " << last_name << " " << first_name << "\n";
 }
+
+string Human::fName()
+{
+	return first_name;
+}
+
+string Human::mName()
+{
+	return middle_name;
+}
+
+string Human::lName()
+{
+	return last_name;
+}
+
+int Human::Age()
+{
+	return age;
+}

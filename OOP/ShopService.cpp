@@ -94,12 +94,22 @@ void ShopService::get_out_employers()
 
 void ShopService::saveEmployers()
 {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	fstream file("Employers.txt", ios_base::out);
+	char* tmp = new char[200];
 	for (auto emp : employers)
 	{
-		//printf("%d %s %s %s %d %d %d %d")
-		file << printf("%d %s %s %s %d %d %d %d"
-			, emp.ID, emp.)
+
+		sprintf_s(tmp,100,"%d %s %s %s %d %d %d %d\n"
+			, emp.ID, emp.lName().data(), emp.fName().data(), emp.mName().data(), emp.Age(), emp.department, emp.position, emp.status);
+		file << tmp;
 	}
+	file.close();
+}
+
+ShopService::~ShopService()
+{
+	saveEmployers();
 }
 

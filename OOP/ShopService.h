@@ -26,5 +26,6 @@ public:
 
 	void get_out_employers();
 	void saveEmployers();
+	~ShopService();
 };
 
