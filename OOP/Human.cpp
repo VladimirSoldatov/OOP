@@ -13,13 +13,13 @@ Human::Human(string _last_name, string _first_name, string _middle_name, int _ag
 
 void Human::sayYourName(string something)
 {
-	std::cout << "My name is " << last_name << " " << first_name<<"\n";
-	std::cout << something;
+	std::cout << "Меня зовут " << last_name << " " << first_name<<"\n";
+
 }
 
 void Human::sayYourName()
 {
-	std::cout << "My name is " << last_name << " " << first_name << "\n";
+	std::cout << "Меня зовут " << last_name << " " << first_name << "\n";
 }
 
 string Human::fName()

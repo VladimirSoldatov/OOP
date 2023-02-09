@@ -4,6 +4,7 @@
 #include<string>
 #include"windows.h"
 #include"Employers.h"
+#include <regex>
 
 void ShopService::create_employers(string path_file, string _nameOrganization)
 {
@@ -22,7 +23,10 @@ void ShopService::create_employers(string path_file, string _nameOrganization)
 	fstream file(path_file, std::ios_base::in);
 	while (!file.eof())
 	{
+	
 		getline(file, line);
+		if (line == "")
+			continue;
 		sscanf_s(line.data(), "%d %s %s %s %d %d %d %d",&ID, lName, 10, fName,
 			10, mName, 20, &age, &position, &department, &status);
 		employers.push_back(Employer(ID, lName, fName, mName, age, position, department, (bool)status));
@@ -97,7 +101,7 @@ void ShopService::saveEmployers()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	fstream file("Employers.txt", ios_base::out);
-	char* tmp = new char[200];
+	char* tmp = new char[100];
 	for (auto emp : employers)
 	{
 
@@ -108,8 +112,24 @@ void ShopService::saveEmployers()
 	file.close();
 }
 
+void ShopService::saveEmployersIDs()
+{
+	string text;
+	fstream file("LastID.txt");
+	while (!file.eof())
+	{
+		string line;
+		getline(file, line);
+		text += line + "\n";
+	}
+	regex regEx("(LastEmployerID)\\s[0-9]+");
+	text = regex_replace(text, regEx, "LastEmployerID "+ to_string(Employer::IDs));
+	
+}
+
 ShopService::~ShopService()
 {
 	saveEmployers();
+	saveEmployersIDs();
 }
 

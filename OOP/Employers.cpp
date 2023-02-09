@@ -47,6 +47,10 @@ Employer::Employer(int _ID, string _last_name,  string _first_name, string _midd
 		set_ID();
 		ID = IDs;
 	}
+	else
+	{
+		SetEmployerIDs(ID);
+	}
 } //Конструктор создания сотрудника
 
 void Employer::setPosition(int _position) //Смена должности в рамках одного отдела
@@ -62,9 +66,9 @@ void Employer::setPosition(int _position, int _department) // Смена должности с 
 
 void Employer::sayYourName(string orgName) // Предствиться
 {
-	std::cout << "Hello! ";
+	std::cout << "Добрый день! ";
 	Human::sayYourName(orgName);
-	std::cout << "Glad to see you in \""<<orgName<<"\"\n";
+	std::cout << "Рад видеть Вас в \""<<orgName<<"\"\n";
 }
 
 
