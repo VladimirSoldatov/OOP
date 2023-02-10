@@ -31,7 +31,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	ShopService myJob("Dream");
-	myJob.create_employers("Employers.txt", "Dream");
+	myJob.create_employers(ShopService::configPath["Employers"], "Dream");
 	myJob.saveEmployers();
 	int count = 0;
 	printf("Выбирите действие:\n");

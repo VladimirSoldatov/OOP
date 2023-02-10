@@ -21,6 +21,8 @@ public:
 	void setPosition(int _position);
 	void setPosition(int _position, int _department);
 	void sayYourName(string name) override;
+	void setEmployerIDs(string path);
+	int getEmployerIDs(string path);
 	//string fName() {return  }
 };
 

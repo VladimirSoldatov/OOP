@@ -5,6 +5,7 @@
 #include"windows.h"
 #include"Employers.h"
 #include <regex>
+#include <map>
 
 void ShopService::create_employers(string path_file, string _nameOrganization)
 {
@@ -53,7 +54,7 @@ void ShopService::getlastIDEmployers(string path_file)
 		}
 	}
 }
-
+std::map<string, string> ShopService::configPath{ {"Employers", "Employers.txt"},{"Goods", "Goods.txt"},{"IDs", "LastID.txt"} };
 ShopService::ShopService(string _nameOrganization)
 {
 	shop = Shop();
@@ -115,21 +116,28 @@ void ShopService::saveEmployers()
 void ShopService::saveEmployersIDs()
 {
 	string text;
-	fstream file("LastID.txt");
-	while (!file.eof())
+	fstream in (ShopService::configPath["IDs"]);
+	while (!in.eof())
 	{
 		string line;
-		getline(file, line);
+		getline(in, line);
 		text += line + "\n";
 	}
+	in.close();
+	fstream out (ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastEmployerID)\\s[0-9]+");
 	text = regex_replace(text, regEx, "LastEmployerID "+ to_string(Employer::IDs));
-	
+	out << text;
+	out.close();
 }
+
 
 ShopService::~ShopService()
 {
 	saveEmployers();
-	saveEmployersIDs();
 }
 
+string* getPathConfig(ShopService obj)
+{
+	return nullptr;
+}
