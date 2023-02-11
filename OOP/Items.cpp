@@ -4,9 +4,22 @@
 #include "ShopService.h"
 #include <regex>
 
-Item::Item(string _name, float _price, int _quantity) :name{_name}
-, price{ _price }, quantity{ _quantity }
+Item::Item(string _name, float _price, int _quantity, int _ID) :name{_name}
+, price{ _price }, quantity{ _quantity }, ID{_ID}
 {
+	if (_ID == 0)
+	{
+		int tmp_id = getItemIDs(ShopService::configPath["IDs"]);
+		if (tmp_id != 0)
+		{
+			IDs = tmp_id;
+		}
+		GenIDs();
+		ID = IDs;
+	}
+
+	setItemIDs(ShopService::configPath["IDs"]);
+
 }
 
 void Item::add_quantity(int _value)
@@ -64,7 +77,7 @@ void Item::setItemIDs(string path)
 	in.close();
 	fstream out(ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastGoodsID)\\s[0-9]+");
-	text = regex_replace(text, regEx, "LastEmployerID " + to_string(ID));
+	text = regex_replace(text, regEx, "LastGoodsID " + to_string(ID));
 	out << text.substr(0, text.size() - 1);
 	out.close();
 }
@@ -73,3 +86,14 @@ float& Item::Price()
 {
 	return price;
 }
+
+int Item::GetIDs()
+{
+	return IDs;
+}
+
+void Item::GenIDs()
+{
+	IDs++;
+}
+int Item::IDs = 0;

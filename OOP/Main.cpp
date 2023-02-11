@@ -42,6 +42,6 @@ int main()
 	}
 
 	myJob.visit_client(1, "Ivan");
-
+	myJob.setup_goods("Огурец", 23, 1);
 	return 0;
 }

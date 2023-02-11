@@ -1,10 +1,11 @@
-#include<iostream>
+#include <iostream>
 #include "Shop.h"
 #include "Items.h"
-#include"Entrances.h"
-#include<fstream>
-#include<string>
+#include "Entrances.h"
+#include <fstream>
+#include <string>
 #include "ShopService.h"
+#include "windows.h"
 
 
 Shop::Shop()
@@ -13,37 +14,39 @@ Shop::Shop()
 	setup_goods(ShopService::configPath["Goods"]); // При создании объекта класса Shop принимаем список товаров для продажи
 }
 
-void Shop::setup_goods(string name, float price, int quantity) // примитивная функция для добавления одной позиции товара
+void Shop::setup_goods(string name, float price, int quantity, int ID) // примитивная функция для добавления одной позиции товара
 {
 	
 	bool flag = false;
 	for (auto& good : goods)
 	{
-		if (good.Name() == name and good.Price() == price)
+		if (good.Name() == name && good.Price() == price)
 		{
 			good.add_quantity(quantity);
-			flag = false;
+			flag = true;
 			break;
 		}	
 	}
-	
 	if (!flag)
-		goods.push_back(Item(name, price, quantity));
+		goods.push_back(Item(name, price, quantity, ID));
 		
 }
 
 void Shop::setup_goods(string file_path)
 {
 	fstream file (file_path, std::ios_base::in); //Открываем файл в режиме чтения
-	char* name = new char[20];//Создаем массив char для хранения символьных данных
+	char* name = new char[50];//Создаем массив char для хранения символьных данных
 	float price; // Переменная для сохранения не целочисленных данных
 	int quantity; // Переменная для целочисленных данных. Исходи, что товары будут продааться поштучно
+	int ID; // Идентификатор товара
 	string line; // Переменная для хранения считанной строки
 	while (!file.eof())  // Цикл для чтения файла до его конца
 	{
 		getline(file, line); // считываем строку из файла file и заисываем в переменную line
-		sscanf_s(line.data(),"%s %f %d", name, 20, &price, &quantity); // Парсим сроку по типам данных
-		setup_goods(name, price, quantity);
+		if (line == "")
+			continue;
+		sscanf_s(line.data(),"%d %s %f %d", &ID, name, 20, &price, &quantity); // Парсим сроку по типам данных
+		setup_goods(name, price, quantity, ID);
 		/*bool flag = false;
 		for (auto& good : goods)
 		{
@@ -86,4 +89,24 @@ void Shop::EnterClient(string clientName)
 	Entrance tmp(clientName);
 	//Логика работы с клиентом.
 	entrances.push_back(tmp);
+}
+
+void Shop::saveGoods(string file_path)
+{
+
+		SetConsoleCP(1251);
+		SetConsoleOutputCP(1251);
+		fstream file(file_path, ios_base::out);
+		char* tmp = new char[100];
+		for (auto item: goods)
+		{
+
+			sprintf_s(tmp, 100, "%d %s %.2f %d\n"
+				, item.ID, item.name.data(), item.price, item.quantity);
+			file << tmp;
+		}
+		file.close();
+
+	
+
 }

@@ -131,10 +131,16 @@ void ShopService::saveEmployersIDs()
 	out.close();
 }
 
+int ShopService::getEmployersIDs()
+{
+	return 0;
+}
+
 
 ShopService::~ShopService()
 {
 	saveEmployers();
+	saveGoods(configPath["Goods"]);
 }
 
 string* getPathConfig(ShopService obj)

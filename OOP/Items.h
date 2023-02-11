@@ -9,8 +9,10 @@ class Item // Класс деталей
 	float price;
 	int quantity;
 	int ID;
+	static int IDs;
 public:
-	Item(string _name, float _price, int _quantity);
+	friend class Shop;
+	Item(string _name, float _price, int _quantity, int _ID);
 	void add_quantity(int _value);
 	void delete_quantity(int _value);
 	string Name();
@@ -18,6 +20,8 @@ public:
 	int getItemIDs(string path);
 	void setItemIDs(string path);
 	float& Price();
+	static int GetIDs();
+	static void GenIDs();
 
 };
 
