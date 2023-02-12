@@ -2,6 +2,8 @@
 #include"ShopService.h"
 #include"windows.h"
 #include"SQL.h"
+
+
 using namespace std;
 
 enum Activity
@@ -27,6 +29,8 @@ string ActivityString[] = {
 string to_string(Activity e) {
 	return ActivityString[(int)e];
 }
+
+
 int main()
 {
 	SetConsoleCP(1251);
@@ -41,6 +45,7 @@ int main()
 		printf("%d. %s\n", count, item.data());
 		count++;
 	}
+
 	SQL sql;
 	return 0;
 }

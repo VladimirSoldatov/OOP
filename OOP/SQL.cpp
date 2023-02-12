@@ -3,21 +3,56 @@
 #include <windows.h>
 #include <oledb.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
 #include <conio.h>
+#include<regex>
 using namespace std;
 #import "C:\Program Files (x86)\Common Files\System\ado\msado15.dll" no_namespace rename("EOF", "EndOfFile")
 
 
+
+wchar_t* char2wchar(const char* cchar)
+{
+	wchar_t* m_wchar;
+	int len = MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), NULL, 0);
+	m_wchar = new wchar_t[len + 1];
+	MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), m_wchar, len);
+	m_wchar[len] = '\0';
+	return m_wchar;
+}
+wchar_t* exec(const char* cmd) {
+	std::array<char, 128> buffer;
+	std::string result;
+	std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
+	if (!pipe) {
+		throw std::runtime_error("popen() failed!");
+	}
+	while (fgets(buffer.data(), (int)buffer.size(), pipe.get()) != nullptr) {
+		result += buffer.data();
+	}
+	
+	regex regEx("(Instance pipe name:)\\s(\\S+)");
+	vector<string> m_vecFields{ sregex_token_iterator(result.begin(), result.end(), regEx, 2), sregex_token_iterator() };
+	wchar_t connection[255] = L"provider=SQLOLEDB; initial catalog=Test; data source=";
+	wcscat_s(connection, 255, char2wchar(m_vecFields[0].data()));
+	wcscat_s(connection, 255, L"; Trusted_Connection=yes; ");
+	return connection;
+}
+
 SQL::SQL()
 {
-	CoInitialize(NULL);
+	HRESULT T = CoInitialize(NULL);
 	_ConnectionPtr pConn(__uuidof(Connection));
 	_RecordsetPtr pRs(__uuidof(Recordset));
 
 	//_bstr_t strCnn("Data Source=(localdb)\ProjectsV12;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;");
-
-
-	pConn->Open(L"provider=SQLOLEDB;initial catalog=Test;data source=np:\\\\.\\pipe\\LOCALDB#2653593C\\tsql\\query;Trusted_Connection=yes;", L"", L"", 0);
+	wchar_t* connection = exec("SqlLocalDB.exe i \"MSSQLLocalDB\"");
+	pConn->Open(connection, L"", L"", 0);
 	string sqlTest = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Test') BEGIN CREATE DATABASE Test END";
 	pRs = pConn->Execute(sqlTest.data() , NULL, adCmdText);
 	pRs.Release();
