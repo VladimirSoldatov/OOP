@@ -20,6 +20,7 @@ void Shop::setup_goods(string name, float price, int quantity, int ID) // примит
 	bool flag = false;
 	for (auto& good : goods)
 	{
+
 		if (good.Name() == name && good.Price() == price)
 		{
 			good.add_quantity(quantity);

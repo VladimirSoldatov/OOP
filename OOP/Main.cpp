@@ -1,6 +1,7 @@
 #include<iostream>
 #include"ShopService.h"
 #include"windows.h"
+#include"SQL.h"
 using namespace std;
 
 enum Activity
@@ -40,8 +41,6 @@ int main()
 		printf("%d. %s\n", count, item.data());
 		count++;
 	}
-
-	myJob.visit_client(1, "Ivan");
-	myJob.setup_goods("Огурец", 23, 1);
+	SQL sql;
 	return 0;
 }

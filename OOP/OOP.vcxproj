@@ -135,9 +135,11 @@
     <ClCompile Include="Service.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="ShopService.cpp" />
+    <ClCompile Include="SQL.cpp" />
     <ClCompile Include="Works.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdoImport.h" />
     <ClInclude Include="Employers.h" />
     <ClInclude Include="Entrances.h" />
     <ClInclude Include="Human.h" />
@@ -145,6 +147,7 @@
     <ClInclude Include="Service.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="ShopService.h" />
+    <ClInclude Include="SQL.h" />
     <ClInclude Include="Works.h" />
   </ItemGroup>
   <ItemGroup>
