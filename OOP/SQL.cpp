@@ -25,7 +25,20 @@ wchar_t* char2wchar(const char* cchar)
 	m_wchar[len] = '\0';
 	return m_wchar;
 }
+void exec_IN(const char* cmd) {
+	std::array<char, 128> buffer;
+	std::string result;
+	std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
+	if (!pipe) {
+		throw std::runtime_error("popen() failed!");
+	}
+	while (fgets(buffer.data(), (int)buffer.size(), pipe.get()) != nullptr) {
+		result += buffer.data();
+	}
+}
+
 wchar_t* exec(const char* cmd) {
+	METKA:
 	std::array<char, 128> buffer;
 	std::string result;
 	std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
@@ -38,6 +51,11 @@ wchar_t* exec(const char* cmd) {
 	
 	regex regEx("(Instance pipe name:)\\s(\\S+)");
 	vector<string> m_vecFields{ sregex_token_iterator(result.begin(), result.end(), regEx, 2), sregex_token_iterator() };
+	if (m_vecFields.size() == 1)
+	{
+		exec_IN("SqlLocalDB.exe start");
+		goto METKA;
+	}
 	wchar_t connection[255] = L"provider=SQLOLEDB; initial catalog=Test; data source=";
 	wcscat_s(connection, 255, char2wchar(m_vecFields[0].data()));
 	wcscat_s(connection, 255, L"; Trusted_Connection=yes; ");
@@ -49,7 +67,7 @@ SQL::SQL()
 	HRESULT T = CoInitialize(NULL);
 	_ConnectionPtr pConn(__uuidof(Connection));
 	_RecordsetPtr pRs(__uuidof(Recordset));
-
+	exec_IN("SqlLocalDB.exe start");
 	//_bstr_t strCnn("Data Source=(localdb)\ProjectsV12;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;");
 	wchar_t* connection = exec("SqlLocalDB.exe i \"MSSQLLocalDB\"");
 	pConn->Open(connection, L"", L"", 0);
