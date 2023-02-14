@@ -67,7 +67,7 @@ int Item::getItemIDs(string path)
 void Item::setItemIDs(string path)
 {
 	string text;
-	fstream in(ShopService::configPath["IDs"]);
+	fstream in(path);
 	while (!in.eof())
 	{
 		string line;

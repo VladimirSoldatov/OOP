@@ -51,12 +51,15 @@ wchar_t* exec(const char* cmd) {
 	
 	regex regEx("(Instance pipe name:)\\s(\\S+)");
 	vector<string> m_vecFields{ sregex_token_iterator(result.begin(), result.end(), regEx, 2), sregex_token_iterator() };
-	if (m_vecFields.size() == 1)
+	regEx = regex("(Имя канала экземпляра:)\\s(\\S+)");
+	if (m_vecFields.size() != 1)
+	m_vecFields = { sregex_token_iterator(result.begin(), result.end(), regEx, 2), sregex_token_iterator() };
+	if (m_vecFields.size() != 1)
 	{
 		exec_IN("SqlLocalDB.exe start");
 		goto METKA;
 	}
-	wchar_t connection[255] = L"provider=SQLOLEDB; initial catalog=Test; data source=";
+	wchar_t connection[255] = L"provider=SQLOLEDB; initial catalog=master; data source=";
 	wcscat_s(connection, 255, char2wchar(m_vecFields[0].data()));
 	wcscat_s(connection, 255, L"; Trusted_Connection=yes; ");
 	return connection;
@@ -67,14 +70,17 @@ SQL::SQL()
 	HRESULT T = CoInitialize(NULL);
 	_ConnectionPtr pConn(__uuidof(Connection));
 	_RecordsetPtr pRs(__uuidof(Recordset));
-	exec_IN("SqlLocalDB.exe start");
+	//exec_IN("SqlLocalDB.exe start");
 	//_bstr_t strCnn("Data Source=(localdb)\ProjectsV12;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;");
 	wchar_t* connection = exec("SqlLocalDB.exe i \"MSSQLLocalDB\"");
 	pConn->Open(connection, L"", L"", 0);
 	string sqlTest = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Test') BEGIN CREATE DATABASE Test END";
 	pRs = pConn->Execute(sqlTest.data() , NULL, adCmdText);
 	pRs.Release();
-	sqlTest = "USE TEST;IF NOT EXISTS(SELECT * FROM TEST) BEGIN CREATE Table TEST(Id INT) END";
+	sqlTest = "USE TEST;IF NOT EXISTS (select * from INFORMATION_SCHEMA.TABLES S where S.TABLE_CATALOG = 'TEST' and S.TABLE_NAME = 'TEST') BEGIN CREATE Table TEST(Id INT, name varchar(50)) END";
+	pRs = pConn->Execute(sqlTest.data(), NULL, adCmdText);
+	pRs.Release();
+	sqlTest = "USE TEST;IF NOT EXISTS (select * from test) BEGIN INSERT INTO TEST(Id, name) values (1, 'Mate') INSERT INTO TEST(Id, name) values (2, 'House') END";
 	pRs = pConn->Execute(sqlTest.data(), NULL, adCmdText);
 	pRs.Release();
 	sqlTest = "select * from test";
@@ -83,6 +89,8 @@ SQL::SQL()
 	while (!pRs->EndOfFile)
 	{
 		printf((_bstr_t)pRs->GetCollect("Id"));
+		printf("\t");
+		printf((_bstr_t)pRs->GetCollect("Name"));
 		printf("\n");
 		pRs->MoveNext();
 	}

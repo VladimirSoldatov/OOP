@@ -86,7 +86,8 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 
 }
 
-void ShopService::addNewEmployer(string _lName, string _fName, string _mName, int _age, int _departament, int _position, bool _status)
+void ShopService::addNewEmployer(string _lName, string _fName, string _mName,
+	int _age, int _departament, int _position, bool _status)
 {
 	employers.push_back(Employer(0, _lName,
 		_fName, _mName, _age, _departament

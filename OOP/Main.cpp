@@ -45,7 +45,8 @@ int main()
 		printf("%d. %s\n", count, item.data());
 		count++;
 	}
-
+	myJob.setup_goods("Пирожок",10,5);
+//	myJob.addNewEmployer("Иванов","Иван", "Иванович", 30, 1,2,1);
 	SQL sql;
 	return 0;
 }

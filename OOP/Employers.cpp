@@ -51,7 +51,7 @@ Employer::Employer(int _ID, string _last_name,  string _first_name, string _midd
 	{
 		int tmp_id = getEmployerIDs(ShopService::configPath["IDs"]);
 		GenIDs();
-		if (tmp_id != 0)
+		if (tmp_id != 0 && tmp_id == IDs)
 		{
 			IDs = tmp_id;
 		}
