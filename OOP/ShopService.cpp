@@ -43,14 +43,17 @@ void ShopService::getlastIDEmployers(string path_file)
 	string line;
 	char name[20];
 	int ID;
-	while (!file.eof())
+	if (file.is_open())
 	{
-		getline(file, line);
-		auto tmp = line.find("LastEmployerID");
-		if (line.find("LastEmployerID") == 0)
+		while (!file.eof())
 		{
-			sscanf_s(line.data(), "%s %d", name, 20, &ID);
-			Employer::IDs = ID;
+			getline(file, line);
+			auto tmp = line.find("LastEmployerID");
+			if (line.find("LastEmployerID") == 0)
+			{
+				sscanf_s(line.data(), "%s %d", name, 20, &ID);
+				Employer::IDs = ID;
+			}
 		}
 	}
 }
@@ -128,6 +131,8 @@ void ShopService::saveEmployersIDs()
 	fstream out (ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastEmployerID)\\s[0-9]+");
 	text = regex_replace(text, regEx, "LastEmployerID "+ to_string(Employer::IDs));
+	if (text == "")
+		text = "LastEmployerID " + to_string(Employer::IDs);
 	out << text;
 	out.close();
 }

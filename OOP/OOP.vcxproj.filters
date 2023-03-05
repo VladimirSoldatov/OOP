@@ -79,14 +79,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Employers.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
     <Text Include="Goods.txt">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="LastID.txt">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="Employers.txt">
+      <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
 </Project>

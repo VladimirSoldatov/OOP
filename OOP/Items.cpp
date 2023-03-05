@@ -50,17 +50,20 @@ int Item::getItemIDs(string path)
 	int result = 0;
 	string text;
 	fstream file(ShopService::configPath["IDs"]);
-	while (!file.eof())
+	if (file.is_open())
 	{
-		string line;
-		getline(file, line);
-		text += line + "\n";
+		while (!file.eof())
+		{
+			string line;
+			getline(file, line);
+			text += line + "\n";
+		}
+		regex regEx("(LastGoodsID)\\s([0-9]+)");
+		vector<string> m_vecFields{ sregex_token_iterator(text.begin(), text.end(), regEx, 2), sregex_token_iterator() };
+		if (m_vecFields.size() == 0 || m_vecFields[0] != "")
+			result = strtol(m_vecFields[0].data(), NULL, 10);
+		file.close();
 	}
-	regex regEx("(LastGoodsID)\\s([0-9]+)");
-	vector<string> m_vecFields{ sregex_token_iterator(text.begin(), text.end(), regEx, 2), sregex_token_iterator() };
-	if (m_vecFields[0] != "")
-		result = strtol(m_vecFields[0].data(), NULL, 10);
-	file.close();
 	return result;
 }
 
