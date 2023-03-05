@@ -96,6 +96,8 @@ void Employer::setEmployerIDs(string path)
 	fstream out(ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastEmployerID)\\s[0-9]+");
 	text = regex_replace(text, regEx, "LastEmployerID " + to_string(Employer::IDs));
+	if (text == "")
+		text = "LastEmployerID " + to_string(Employer::IDs);
 	out << text.substr(0, text.size() - 1);
 	out.close();
 }
