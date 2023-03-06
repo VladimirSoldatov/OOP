@@ -37,13 +37,33 @@ int main()
 	SetConsoleOutputCP(1251);
 	ShopService myJob("Dream");
 	myJob.create_employers(ShopService::configPath["Employers"], "Dream");
-	myJob.saveEmployers();
 	int count = 0;
+	int choice = 0;
 	printf("Выбирите действие:\n");
 	for (auto item : ActivityString)
 	{
 		printf("%d. %s\n", count, item.data());
 		count++;
+	}
+	scanf_s("%d", &choice);
+	cout << ActivityString[choice] << endl;
+	switch (choice)
+	{
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	default:
+		break;
+
 	}
 	myJob.setup_goods("Пирожок",10,5);
 //	myJob.addNewEmployer("Иванов","Иван", "Иванович", 30, 1,2,1);
