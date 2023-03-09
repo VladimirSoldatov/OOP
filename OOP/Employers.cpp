@@ -4,45 +4,13 @@
 #include<fstream>
 #include <regex>
 #include "ShopService.h"
+#include<array>
+
 using namespace std;
-enum Departments
-{
-	Management,
-	Sellers,
-	Repairmen,
-	Common
 
 
-}; // Перечисление названия отделов
-string DepartmentsString[]
-{
-	"Аппарат управления",
-	"Отдел продаж",
-	"Отдел ремонта",
-	"Общий отдел"
-};
-enum Positions
-{
-	Director,
-	DirectorAssistent,
-	Ingineer,
-	SeniorIngineer,
-	Sellman,
-	SeniorSellman,
-	Accountant,
-	Administrator
-};// Перечисление должностей
-string PositionString[]
-{
-	"Директор",
-	"Заместитель директора",
-	"Инжинер",
-	"Старший инжинер",
-	"Менеджер по продажам",
-	"Старший менеджер по продажам",
-	"Менеджер по клиентам",
-	"Администратор"
-};
+
+
 void Employer::set_ID()
 {
 	ID = IDs;

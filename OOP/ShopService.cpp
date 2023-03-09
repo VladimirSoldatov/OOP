@@ -6,8 +6,11 @@
 #include"Employers.h"
 #include <regex>
 #include <map>
+#include <conio.h>
+#include"Strings.h"
 
-void ShopService::create_employers(string path_file, string _nameOrganization)
+
+void ShopService::create_employers(string path_file)
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -95,6 +98,48 @@ void ShopService::addNewEmployer(string _lName, string _fName, string _mName,
 	employers.push_back(Employer(0, _lName,
 		_fName, _mName, _age, _departament
 		, _position, _status));
+	Employer emp = employers.at(employers.size() - 1);
+	printf("%s %s %s добавлен\n", emp.lName().data(), emp.fName().data(), emp.mName().data());
+}
+
+void ShopService::addNewEmployer()
+{
+	char* lName = new char[50];
+	char* fName = new char[50];
+	char* mName = new char[50];
+
+	int age = 0;
+	int department;
+	int position;
+	bool status = 1;
+	char correct = 'n';
+	cout << endl;
+	do 
+	{
+		cout << "Введите ФИО сотрудника через пробел и возраст:\t";
+		scanf_s("%s %s %s %d", lName,50, fName, 50, mName, 50, &age);
+		printf("Введено %s %s %s %d, все верно?\t", lName, fName, mName, age);
+		correct = (char)_getch();
+		cin.clear();
+	} while (correct != 'y');
+	cout << "Выбирите должность из списка, указав ID c экрана:\t";
+	int count = 0;
+	cout << endl;
+	for (int i = 0; i< DepartmentsString.size() ;i++)
+	{
+		printf("%d %s\n", count++, DepartmentsString[i].data());
+	}
+	cin >> department;
+	count = 0;
+	for (int i = 0; i< PositionString.size(); i++)
+	{
+		printf("%d %s\n", count++, PositionString[i].data());
+	}
+	cin >> position;
+	addNewEmployer(lName, fName, mName, age, department, position, status);
+	delete[]lName;
+	delete[]fName;
+	delete[]mName;
 }
 
 void ShopService::get_out_employers()

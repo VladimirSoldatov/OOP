@@ -36,7 +36,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	ShopService myJob("Dream");
-	myJob.create_employers(ShopService::configPath["Employers"], "Dream");
+	myJob.create_employers(ShopService::configPath["Employers"]);
 	int count = 0;
 	int choice = 0;
 	printf("Выбирите действие:\n");
@@ -46,10 +46,12 @@ int main()
 		count++;
 	}
 	scanf_s("%d", &choice);
-	cout << ActivityString[choice] << endl;
+
 	switch (choice)
 	{
 	case 1:
+
+		myJob.addNewEmployer();
 		break;
 	case 2:
 		break;
@@ -62,6 +64,7 @@ int main()
 	case 6:
 		break;
 	default:
+		cout << "Выбрано " << ActivityString[choice] << endl;
 		break;
 
 	}

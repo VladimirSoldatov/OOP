@@ -18,7 +18,7 @@ class ShopService :public Shop, public Service
 
 public:
 	static map<string, string> configPath;
-	void create_employers(string path_file,string _nameOrganization);
+	void create_employers(string path_file);
 	void getlastIDEmployers(string path_file);
 	ShopService(string _nameOrganization);
 	void visit_client(int type_of_visit, string clientName);
@@ -26,6 +26,7 @@ public:
 	void addNewEmployer(string _lName,
 		string _fName, string _mName, int _age
 		, int _departament, int _position, bool _status = true);
+	void addNewEmployer();
 	friend string * getPathConfig(ShopService obj);
 	void get_out_employers();
 	void saveEmployers();

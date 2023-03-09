@@ -146,6 +146,7 @@
     <ClInclude Include="AdoImport.h" />
     <ClInclude Include="Employers.h" />
     <ClInclude Include="Entrances.h" />
+    <ClInclude Include="Strings.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="Service.h" />
