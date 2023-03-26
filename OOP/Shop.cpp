@@ -168,7 +168,6 @@ void Shop::delete_goods()
 	int choice;
 	cout << "¬ведите ID товара:";
 	scanf_s("%d", &choice);
-	int number;
 	for (auto &item : goods)
 	{
 		if (item.ID == choice)
