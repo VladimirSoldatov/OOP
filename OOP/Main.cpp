@@ -42,43 +42,49 @@ int main()
 	SetConsoleOutputCP(1251);
 	ShopService myJob("Dream");
 	myJob.create_employers(ShopService::configPath["Employers"]);
-	int count = 0;
+	int count;
 	int choice = 0;
-	printf("Выбирите действие:\n");
-	for (auto item : ActivityString)
+	bool flag = false;
+	while (!flag)
 	{
-		printf("%d. %s\n", count, item.data());
-		count++;
+		count = 0;
+		printf("Выбирите действие:\n");
+		for (auto item : ActivityString)
+		{
+			printf("%d. %s\n", count, item.data());
+			count++;
+		}
+		scanf_s("%d", &choice);
+
+		switch (choice)
+		{
+		case 1:
+			myJob.setup_goods();
+			break;
+		case 2:
+			break;
+
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			myJob.addNewEmployer();
+			break;
+		case 8:
+			break;
+		default:
+			cout << "Выбрано " << ActivityString[choice] << endl;
+			flag = true;
+			break;
+
+		}
 	}
-	scanf_s("%d", &choice);
-
-	switch (choice)
-	{
-	case 1:
-		myJob.setup_goods();
-		break;
-	case 2:
-		break;
-
-	case 3:
-		break;
-	case 4:
-		break;
-	case 5:
-		break;
-	case 6:
-		break;
-	case 7:
-		myJob.addNewEmployer();
-		break;
-	case 8:
-		break;
-	default:
-		cout << "Выбрано " << ActivityString[choice] << endl;
-		break;
-
-	}
-	myJob.setup_goods("Пирожок",10,5);
+//	myJob.setup_goods("Пирожок",10,5);
 //	myJob.addNewEmployer("Иванов","Иван", "Иванович", 30, 1,2,1);
 	//SQL sql;
 	return 0;

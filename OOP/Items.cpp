@@ -4,8 +4,8 @@
 #include "ShopService.h"
 #include <regex>
 
-Item::Item(string _name, float _price, float _quantity, int _ID) :name{_name}
-, price{ _price }, quantity{ _quantity }, ID{_ID}
+Item::Item(string _name, float _price, float _quantity, int _ID, int _status):name{_name},
+price{ _price }, quantity{ _quantity }, ID{ _ID }, status{_status}
 {
 	if (_ID == 0)
 	{

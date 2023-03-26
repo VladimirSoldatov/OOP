@@ -14,7 +14,7 @@ Shop::Shop()
 	setup_goods(ShopService::configPath["Goods"]); // При создании объекта класса Shop принимаем список товаров для продажи
 }
 
-void Shop::setup_goods(string name, float price, float quantity, int ID) // примитивная функция для добавления одной позиции товара
+void Shop::setup_goods(string name, float price, float quantity, int ID, int status) // примитивная функция для добавления одной позиции товара
 {
 	
 	bool flag = false;
@@ -29,7 +29,7 @@ void Shop::setup_goods(string name, float price, float quantity, int ID) // прим
 		}	
 	}
 	if (!flag)
-		goods.push_back(Item(name, price, quantity, ID));
+		goods.push_back(Item(name, price, quantity, ID, status));
 		
 }
 
@@ -40,14 +40,15 @@ void Shop::setup_goods(string file_path)
 	float price; // Переменная для сохранения не целочисленных данных
 	float quantity; // Переменная для целочисленных данных. Исходи, что товары будут продааться поштучно
 	int ID; // Идентификатор товара
+	int status;
 	string line; // Переменная для хранения считанной строки
 	while (!file.eof())  // Цикл для чтения файла до его конца
 	{
 		getline(file, line); // считываем строку из файла file и заисываем в переменную line
 		if (line == "")
 			continue;
-		sscanf_s(line.data(),"%d %s %f %f", &ID, name, 20, &price, &quantity); // Парсим сроку по типам данных
-		setup_goods(name, price, quantity, ID);
+		sscanf_s(line.data(),"%d %s %f %f %d", &ID, name, 20, &price, &quantity, &status); // Парсим сроку по типам данных
+		setup_goods(name, price, quantity, ID, status);
 		/*bool flag = false;
 		for (auto& good : goods)
 		{
@@ -115,7 +116,30 @@ void Shop::saveGoods(string file_path)
 
 void Shop::setup_goods()
 {
-	list_goods();
+	cout << "Вывести список товаров?(д/н)\n";
+	char choice = getchar();
+	choice = getchar();
+	switch (choice)
+	{
+	case 'д':
+		cout << "Список продуктов:\n";
+		list_goods();
+		break;
+	default:
+		cout << "Слепой выбор\n";
+	}
+	cout << "Продолжить?(д/н)";
+	choice = getchar();
+	switch (choice)
+	{
+	case 'д':
+		cout << "Продолжаем\n";
+		list_goods();
+		break;
+	default:
+		cout << "Отмена\n";
+		return;
+	}
 	string name;
 	float price;
 	float quantity;
@@ -134,5 +158,22 @@ void Shop::list_goods()
 {
 	cout << "ID\tНаименование\tЦена\tКоличество\n";
 	for (auto item : goods)
+		if(item.status == 1)
 		item.ToString();
+}
+
+void Shop::delete_goods()
+{
+	list_goods();
+	int choice;
+	cout << "Введите ID товара:";
+	scanf_s("%d", &choice);
+	int number;
+	for (auto &item : goods)
+	{
+		if (item.ID == choice)
+		{
+			item.status = 0;
+		}
+	}
 }
