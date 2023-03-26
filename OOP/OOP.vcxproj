@@ -159,6 +159,7 @@
     <Text Include="Goods.txt" />
     <Text Include="Employers.txt" />
     <Text Include="LastID.txt" />
+    <Text Include="История изменений.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

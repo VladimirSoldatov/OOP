@@ -91,5 +91,8 @@
     <Text Include="Employers.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="История изменений.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>

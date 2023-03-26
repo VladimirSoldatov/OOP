@@ -4,7 +4,7 @@
 #include "ShopService.h"
 #include <regex>
 
-Item::Item(string _name, float _price, int _quantity, int _ID) :name{_name}
+Item::Item(string _name, float _price, float _quantity, int _ID) :name{_name}
 , price{ _price }, quantity{ _quantity }, ID{_ID}
 {
 	if (_ID == 0)
@@ -22,7 +22,7 @@ Item::Item(string _name, float _price, int _quantity, int _ID) :name{_name}
 
 }
 
-void Item::add_quantity(int _value)
+void Item::add_quantity(float _value)
 {
 	quantity += _value;
 }
@@ -40,7 +40,7 @@ string Item::Name()
 	return name;
 }
 
-int& Item::Quantity()
+float& Item::Quantity()
 {
 	return quantity;
 }
@@ -98,5 +98,9 @@ int Item::GetIDs()
 void Item::GenIDs()
 {
 	IDs++;
+}
+void Item::ToString()
+{
+	cout << ID << "\t" << name << "\t\t" <<price<<"\t"<< quantity << "\n";
 }
 int Item::IDs = 0;

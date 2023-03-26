@@ -7,21 +7,22 @@ class Item // Класс деталей
 {
 	string name;
 	float price;
-	int quantity;
+	float quantity;
 	int ID;
 	static int IDs;
 public:
 	friend class Shop;
-	Item(string _name, float _price, int _quantity, int _ID);
-	void add_quantity(int _value);
+	Item(string _name, float _price, float _quantity, int _ID);
+	void add_quantity(float _value);
 	void delete_quantity(int _value);
 	string Name();
-	int& Quantity(); 
+	float& Quantity(); 
 	int getItemIDs(string path);
 	void setItemIDs(string path);
 	float& Price();
 	static int GetIDs();
 	static void GenIDs();
+	void ToString();
 
 };
 

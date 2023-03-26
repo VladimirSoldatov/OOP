@@ -14,7 +14,7 @@ Shop::Shop()
 	setup_goods(ShopService::configPath["Goods"]); // При создании объекта класса Shop принимаем список товаров для продажи
 }
 
-void Shop::setup_goods(string name, float price, int quantity, int ID) // примитивная функция для добавления одной позиции товара
+void Shop::setup_goods(string name, float price, float quantity, int ID) // примитивная функция для добавления одной позиции товара
 {
 	
 	bool flag = false;
@@ -38,7 +38,7 @@ void Shop::setup_goods(string file_path)
 	fstream file (file_path, std::ios_base::in); //Открываем файл в режиме чтения
 	char* name = new char[50];//Создаем массив char для хранения символьных данных
 	float price; // Переменная для сохранения не целочисленных данных
-	int quantity; // Переменная для целочисленных данных. Исходи, что товары будут продааться поштучно
+	float quantity; // Переменная для целочисленных данных. Исходи, что товары будут продааться поштучно
 	int ID; // Идентификатор товара
 	string line; // Переменная для хранения считанной строки
 	while (!file.eof())  // Цикл для чтения файла до его конца
@@ -46,7 +46,7 @@ void Shop::setup_goods(string file_path)
 		getline(file, line); // считываем строку из файла file и заисываем в переменную line
 		if (line == "")
 			continue;
-		sscanf_s(line.data(),"%d %s %f %d", &ID, name, 20, &price, &quantity); // Парсим сроку по типам данных
+		sscanf_s(line.data(),"%d %s %f %f", &ID, name, 20, &price, &quantity); // Парсим сроку по типам данных
 		setup_goods(name, price, quantity, ID);
 		/*bool flag = false;
 		for (auto& good : goods)
@@ -64,13 +64,14 @@ void Shop::setup_goods(string file_path)
 		// Используем алгоритм более примитивой функции после того, как распарсили текстовый файл до простоых аргументов
 	}
 	file.close(); // Закрываем файл после чтения
+	delete[]name;
 }
 
 void Shop::setup_goods(Item item)
 {
 }
 
-void Shop::get_item(int quantity, string item_name)
+void Shop::get_item(float quantity, string item_name)
 {
 }
 
@@ -102,7 +103,7 @@ void Shop::saveGoods(string file_path)
 		for (auto item: goods)
 		{
 
-			sprintf_s(tmp, 100, "%d %s %.2f %d\n"
+			sprintf_s(tmp, 100, "%d %s %.2f %.2f\n"
 				, item.ID, item.name.data(), item.price, item.quantity);
 			file << tmp;
 		}
@@ -110,4 +111,28 @@ void Shop::saveGoods(string file_path)
 
 	
 
+}
+
+void Shop::setup_goods()
+{
+	list_goods();
+	string name;
+	float price;
+	float quantity;
+	cout <<"Введите наименование товара: ";
+	cin.ignore();
+	getline(cin, name,'\n');
+	printf("Введите цену: ");
+	scanf_s("%f",&price);
+	printf("Введите количество: ");
+	scanf_s("%f", &quantity);
+	setup_goods(name, price, quantity);
+
+}
+
+void Shop::list_goods()
+{
+	cout << "ID\tНаименование\tЦена\tКоличество\n";
+	for (auto item : goods)
+		item.ToString();
 }

@@ -4,6 +4,7 @@
 #include"SQL.h"
 
 
+
 using namespace std;
 
 enum Activity
@@ -14,6 +15,8 @@ enum Activity
 	УдалитьРаботу,
 	ПринятьКлиентаМагазина,
 	ПринятьКлиентаСервиса,
+	ПринятьРаботника,
+	УволитьРабтника,
 	Выйти = 0
 
 };
@@ -24,7 +27,9 @@ string ActivityString[] = {
 	"Добавить работу",
 	"Удалить работу",
 	"Принять клиента магазина",
-	"Принять клиента сервиса"
+	"Принять клиента сервиса",
+	"Принять работника",
+	"Уволить работника"
 	};
 string to_string(Activity e) {
 	return ActivityString[(int)e];
@@ -50,11 +55,11 @@ int main()
 	switch (choice)
 	{
 	case 1:
-
-		myJob.addNewEmployer();
+		myJob.setup_goods();
 		break;
 	case 2:
 		break;
+
 	case 3:
 		break;
 	case 4:
@@ -63,6 +68,11 @@ int main()
 		break;
 	case 6:
 		break;
+	case 7:
+		myJob.addNewEmployer();
+		break;
+	case 8:
+		break;
 	default:
 		cout << "Выбрано " << ActivityString[choice] << endl;
 		break;
@@ -70,6 +80,6 @@ int main()
 	}
 	myJob.setup_goods("Пирожок",10,5);
 //	myJob.addNewEmployer("Иванов","Иван", "Иванович", 30, 1,2,1);
-	SQL sql;
+	//SQL sql;
 	return 0;
 }

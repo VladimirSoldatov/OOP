@@ -122,7 +122,7 @@ void ShopService::addNewEmployer()
 		correct = (char)_getch();
 		cin.clear();
 	} while (correct != 'y');
-	cout << "Выбирите должность из списка, указав ID c экрана:\t";
+	cout << "\nВыбирите должность из списка, указав ID c экрана:\t";
 	int count = 0;
 	cout << endl;
 	for (int i = 0; i< DepartmentsString.size() ;i++)
