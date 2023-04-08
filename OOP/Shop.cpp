@@ -125,9 +125,9 @@ void Shop::saveGoods(string file_path)
 void Shop::setup_goods()
 {
 	cout << "Вывести список товаров?(д/н)\n";
-	
+	int result;
 	char choice = getchar();
-	getchar();
+	result = getchar();
 	switch (choice)
 	{
 	case 'д':
@@ -139,7 +139,7 @@ void Shop::setup_goods()
 	}
 	cout << "Продолжить?(д/н)";
 	choice = getchar();
-	getchar();
+	result = getchar();
 	switch (choice)
 	{
 	case 'д':
@@ -149,6 +149,7 @@ void Shop::setup_goods()
 	default:
 		cout << "Отмена\n";
 		this_thread::sleep_for(chrono::seconds(5));
+		system("cls");
 		return;
 	}
 	string name;
