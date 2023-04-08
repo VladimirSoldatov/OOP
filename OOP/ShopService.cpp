@@ -10,7 +10,7 @@
 #include"Strings.h"
 
 
-void ShopService::create_employers(string path_file)
+void ShopService::create_employees(string path_file)
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -40,7 +40,7 @@ void ShopService::create_employers(string path_file)
 
 }
 
-void ShopService::getlastIDEmployers(string path_file)
+void ShopService::getlastIDEmployees(string path_file)
 {
 	fstream file(path_file, ios_base::in);
 	string line;
@@ -92,7 +92,7 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 
 }
 
-void ShopService::addNewEmployer(string _lName, string _fName, string _mName,
+void ShopService::addNewEmployee(string _lName, string _fName, string _mName,
 	int _age, int _departament, int _position, bool _status)
 {
 	employers.push_back(Employer(0, _lName,
@@ -102,7 +102,7 @@ void ShopService::addNewEmployer(string _lName, string _fName, string _mName,
 	printf("%s %s %s добавлен\n", emp.lName().data(), emp.fName().data(), emp.mName().data());
 }
 
-void ShopService::addNewEmployer()
+void ShopService::addNewEmployee()
 {
 	char* lName = new char[50];
 	char* fName = new char[50];
@@ -136,17 +136,21 @@ void ShopService::addNewEmployer()
 		printf("%d %s\n", count++, PositionString[i].data());
 	}
 	cin >> position;
-	addNewEmployer(lName, fName, mName, age, department, position, status);
+	addNewEmployee(lName, fName, mName, age, department, position, status);
 	delete[]lName;
 	delete[]fName;
 	delete[]mName;
 }
 
-void ShopService::get_out_employers()
+void ShopService::delete_employees()
 {
 }
 
-void ShopService::saveEmployers()
+void ShopService::get_out_employees()
+{
+}
+
+void ShopService::saveEmployees()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -162,7 +166,7 @@ void ShopService::saveEmployers()
 	file.close();
 }
 
-void ShopService::saveEmployersIDs()
+void ShopService::saveEmployeesIDs()
 {
 	string text;
 	fstream in (ShopService::configPath["IDs"]);
@@ -182,7 +186,7 @@ void ShopService::saveEmployersIDs()
 	out.close();
 }
 
-int ShopService::getEmployersIDs()
+int ShopService::getEmployeesIDs()
 {
 	return 0;
 }
@@ -190,7 +194,7 @@ int ShopService::getEmployersIDs()
 
 ShopService::~ShopService()
 {
-	saveEmployers();
+	saveEmployees();
 	shop.saveGoods(configPath["Goods"]);
 }
 
@@ -208,4 +212,12 @@ void ShopService::setup_goods()
 void ShopService::delete_goods()
 {
 	shop.delete_goods();
+}
+
+void ShopService::addWork()
+{
+}
+
+void ShopService::deleteWork()
+{
 }

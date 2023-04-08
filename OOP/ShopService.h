@@ -11,7 +11,6 @@ enum typeVisit
 };
 class ShopService
 {
-	
 	Shop shop;
 	Service service;
 	string nameOrganization;
@@ -24,19 +23,20 @@ public:
 	void delete_goods();
 	void addWork();
 	void deleteWork();
-	void create_employers(string path_file);
-	void getlastIDEmployers(string path_file);
+	void create_employees(string path_file);
+	void getlastIDEmployees(string path_file);
 	void visit_client(int type_of_visit, string clientName);
 	string getName() { return nameOrganization; }
-	void addNewEmployer(string _lName,
+	void addNewEmployee(string _lName,
 		string _fName, string _mName, int _age
 		, int _departament, int _position, bool _status = true);
-	void addNewEmployer();
-	friend string * getPathConfig(ShopService obj);
-	void get_out_employers();
-	void saveEmployers();
-	void saveEmployersIDs();
-	int getEmployersIDs();
+	void addNewEmployee();
+	void delete_employees();
+	friend string* getPathConfig(ShopService obj);
+	void get_out_employees();
+	void saveEmployees();
+	void saveEmployeesIDs();
+	int getEmployeesIDs();
 	~ShopService();
 };
 

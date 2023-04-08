@@ -43,7 +43,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	ShopService myJob("Dream");
-	myJob.create_employers(ShopService::configPath["Employers"]);
+	myJob.create_employees(ShopService::configPath["Employers"]);
 	int count;
 	int choice = -1;
 	bool flag = false;
@@ -62,26 +62,29 @@ int main()
 		printf("Выбрано %s\n", ActivityString[choice].data());
 		switch (choice)
 		{
-		case 1:
-	
+		case 1:	
 			myJob.setup_goods();
 			break;
 		case 2:
 			myJob.delete_goods();
 			break;
-
 		case 3:
+			myJob.addWork();
 			break;
 		case 4:
+			myJob.deleteWork();
 			break;
 		case 5:
+			myJob.visit_client(0,"");
 			break;
 		case 6:
+			myJob.visit_client(1,"");
 			break;
 		case 7:
-			myJob.addNewEmployer();
+			myJob.addNewEmployee();
 			break;
 		case 8:
+			myJob.get_out_employees();
 			break;
 		default:;
 			flag = true;
