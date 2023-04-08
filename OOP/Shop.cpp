@@ -17,11 +17,9 @@ Shop::Shop()
 
 void Shop::setup_goods(string name, float price, float quantity, int ID, int status) // примитивная функция для добавления одной позиции товара
 {
-	
 	bool flag = false;
 	for (auto& good : goods)
 	{
-
 		if (good.Name() == name && good.Price() == price)
 		{
 			if (good.status == 1)
@@ -104,22 +102,17 @@ void Shop::EnterClient(string clientName)
 
 void Shop::saveGoods(string file_path)
 {
-
 		SetConsoleCP(1251);
 		SetConsoleOutputCP(1251);
 		fstream file(file_path, ios_base::out);
 		char* tmp = new char[100];
 		for (auto item: goods)
 		{
-
 			sprintf_s(tmp, 100, "%d %s %.2f %.2f %d\n"
 				, item.ID, item.name.data(), item.price, item.quantity, item.status);
 			file << tmp;
 		}
 		file.close();
-
-	
-
 }
 
 void Shop::setup_goods()
@@ -163,7 +156,6 @@ void Shop::setup_goods()
 	printf("Введите количество: ");
 	scanf_s("%f", &quantity);
 	setup_goods(name, price, quantity);
-
 }
 
 void Shop::list_goods()

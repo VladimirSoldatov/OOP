@@ -1,7 +1,7 @@
 #pragma once
 #include"Shop.h"
 #include"Service.h"
-#include"Employers.h"
+#include"Employee.h"
 #include <map>
 using namespace std;
 enum typeVisit
@@ -14,7 +14,7 @@ class ShopService
 	Shop shop;
 	Service service;
 	string nameOrganization;
-	vector<Employer> employers;
+	vector<Employee> employers;
 
 public:
 	ShopService(string _nameOrganistation);

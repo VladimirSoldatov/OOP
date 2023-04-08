@@ -4,7 +4,6 @@ Entrance::Entrance(string _clientName): clientName{_clientName}
 {
 	items = vector<Item>();
 	works = vector<Work>();
-
 }
 
 void Entrance::add_work(Work work)

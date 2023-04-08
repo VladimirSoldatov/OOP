@@ -1,4 +1,4 @@
-#include "Employers.h"
+#include "Employee.h"
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -11,22 +11,22 @@ using namespace std;
 
 
 
-void Employer::set_ID()
+void Employee::set_ID()
 {
 	ID = IDs;
 }
 
-void Employer::GenIDs()
+void Employee::GenIDs()
 {
 	IDs++;
 }
 
-int Employer::IDs = 0;
-void Employer::SetEmployerIDs(int ID)
+int Employee::IDs = 0;
+void Employee::SetIDs(int ID)
 {
 	IDs = ID;
 }
-Employer::Employer(int _ID, string _last_name,  string _first_name, string _middle_name,
+Employee::Employee(int _ID, string _last_name,  string _first_name, string _middle_name,
 	int _age, int _department, int _position, bool _status) :ID{_ID},
 	Human(_last_name, _first_name, _middle_name, _age), department{_department},
 	position{ _position }, status{_status}
@@ -34,7 +34,7 @@ Employer::Employer(int _ID, string _last_name,  string _first_name, string _midd
 
 	if (_ID == 0)
 	{
-		int tmp_id = getEmployerIDs(ShopService::configPath["IDs"]);
+		int tmp_id = getIDs(ShopService::configPath["IDs"]);
 		GenIDs();
 		if (tmp_id != 0 && tmp_id == IDs)
 		{
@@ -44,30 +44,30 @@ Employer::Employer(int _ID, string _last_name,  string _first_name, string _midd
 	}
 	else
 	{
-		SetEmployerIDs(ID);
+		SetIDs(ID);
 	}
-	setEmployerIDs(ShopService::configPath["IDs"]);
+	setIDs(ShopService::configPath["IDs"]);
 } //Конструктор создания сотрудника
 
-void Employer::setPosition(int _position) //Смена должности в рамках одного отдела
+void Employee::setPosition(int _position) //Смена должности в рамках одного отдела
 {
 	position = _position;
 }
 
-void Employer::setPosition(int _position, int _department) // Смена должности с переводом в другой отдел
+void Employee::setPosition(int _position, int _department) // Смена должности с переводом в другой отдел
 {
 	position = _position;
 	department = _department;
 }
 
-void Employer::sayYourName(string orgName) // Представиться
+void Employee::sayYourName(string orgName) // Представиться
 {
 	std::cout << "Добрый день! ";
 	Human::sayYourName(orgName);
 	std::cout << "Рад видеть Вас в \""<<orgName<<"\"\n";
 }
 
-void Employer::setEmployerIDs(string path)
+void Employee::setIDs(string path)
 {
 	string text;
 	fstream in(ShopService::configPath["IDs"]);
@@ -80,14 +80,14 @@ void Employer::setEmployerIDs(string path)
 	in.close();
 	fstream out(ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastEmployerID)\\s[0-9]+");
-	text = regex_replace(text, regEx, "LastEmployerID " + to_string(Employer::IDs));
+	text = regex_replace(text, regEx, "LastEmployerID " + to_string(Employee::IDs));
 	if (text == "")
-		text = "LastEmployerID " + to_string(Employer::IDs);
+		text = "LastEmployerID " + to_string(Employee::IDs);
 	out << text.substr(0, text.size() - 1);
 	out.close();
 }
 
-int Employer::getEmployerIDs(string path)
+int Employee::getIDs(string path)
 {
 	int result = 0;
 	string text;

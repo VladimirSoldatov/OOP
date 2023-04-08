@@ -45,6 +45,9 @@
     <ClCompile Include="SQL.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shop.h">
@@ -65,7 +68,7 @@
     <ClInclude Include="Entrances.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Employers.h">
+    <ClInclude Include="Employee.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Human.h">
@@ -78,6 +81,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Strings.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

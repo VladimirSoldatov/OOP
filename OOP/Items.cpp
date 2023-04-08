@@ -17,7 +17,6 @@ price{ _price }, quantity{ _quantity }, ID{ _ID }, status{_status}
 		GenIDs();
 		ID = IDs;
 	}
-
 	setItemIDs(ShopService::configPath["IDs"]);
 
 }

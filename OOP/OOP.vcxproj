@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Employers.cpp" />
     <ClCompile Include="Entrances.cpp" />
     <ClCompile Include="Human.cpp" />
@@ -144,7 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdoImport.h" />
-    <ClInclude Include="Employers.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="Entrances.h" />
     <ClInclude Include="Strings.h" />
     <ClInclude Include="Human.h" />

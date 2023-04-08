@@ -3,7 +3,7 @@
 #include<fstream>
 #include<string>
 #include"windows.h"
-#include"Employers.h"
+#include"Employee.h"
 #include <regex>
 #include <map>
 #include <conio.h>
@@ -33,7 +33,7 @@ void ShopService::create_employees(string path_file)
 			continue;
 		sscanf_s(line.data(), "%d %s %s %s %d %d %d %d",&ID, lName, 10, fName,
 			10, mName, 20, &age, &position, &department, &status);
-		employers.push_back(Employer(ID, lName, fName, mName, age, position, department, (bool)status));
+		employers.push_back(Employee(ID, lName, fName, mName, age, position, department, (bool)status));
 	
 	}
 	file.close();
@@ -55,7 +55,7 @@ void ShopService::getlastIDEmployees(string path_file)
 			if (line.find("LastEmployerID") == 0)
 			{
 				sscanf_s(line.data(), "%s %d", name, 20, &ID);
-				Employer::IDs = ID;
+				Employee::IDs = ID;
 			}
 		}
 	}
@@ -95,10 +95,10 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 void ShopService::addNewEmployee(string _lName, string _fName, string _mName,
 	int _age, int _departament, int _position, bool _status)
 {
-	employers.push_back(Employer(0, _lName,
+	employers.push_back(Employee(0, _lName,
 		_fName, _mName, _age, _departament
 		, _position, _status));
-	Employer emp = employers.at(employers.size() - 1);
+	Employee emp = employers.at(employers.size() - 1);
 	printf("%s %s %s добавлен\n", emp.lName().data(), emp.fName().data(), emp.mName().data());
 }
 
@@ -179,9 +179,9 @@ void ShopService::saveEmployeesIDs()
 	in.close();
 	fstream out (ShopService::configPath["IDs"], ios::out);
 	regex regEx("(LastEmployerID)\\s[0-9]+");
-	text = regex_replace(text, regEx, "LastEmployerID "+ to_string(Employer::IDs));
+	text = regex_replace(text, regEx, "LastEmployerID "+ to_string(Employee::IDs));
 	if (text == "")
-		text = "LastEmployerID " + to_string(Employer::IDs);
+		text = "LastEmployerID " + to_string(Employee::IDs);
 	out << text;
 	out.close();
 }
