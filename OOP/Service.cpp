@@ -12,3 +12,11 @@ void Service::EnterClient(string clientName)
 	//Логика работы с клиентом.
 	entrances.push_back(tmp);
 }
+
+void Service::addWork()
+{
+}
+
+void Service::deleteWork()
+{
+}

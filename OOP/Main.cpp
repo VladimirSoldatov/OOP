@@ -2,6 +2,8 @@
 #include"ShopService.h"
 #include"windows.h"
 #include"SQL.h"
+#include <conio.h>
+
 
 
 
@@ -43,7 +45,7 @@ int main()
 	ShopService myJob("Dream");
 	myJob.create_employers(ShopService::configPath["Employers"]);
 	int count;
-	int choice = 0;
+	int choice = -1;
 	bool flag = false;
 	while (!flag)
 	{
@@ -54,14 +56,18 @@ int main()
 			printf("%d. %s\n", count, item.data());
 			count++;
 		}
-		scanf_s("%d", &choice);
-
+		do
+		choice = _getch() - '0';
+		while (choice < 0);
+		printf("Выбрано %s\n", ActivityString[choice].data());
 		switch (choice)
 		{
 		case 1:
+	
 			myJob.setup_goods();
 			break;
 		case 2:
+			myJob.delete_goods();
 			break;
 
 		case 3:
@@ -77,8 +83,7 @@ int main()
 			break;
 		case 8:
 			break;
-		default:
-			cout << "Выбрано " << ActivityString[choice] << endl;
+		default:;
 			flag = true;
 			break;
 

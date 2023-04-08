@@ -101,6 +101,9 @@ void Item::GenIDs()
 }
 void Item::ToString()
 {
-	cout << ID << "\t" << name << "\t\t" <<price<<"\t"<< quantity << "\n";
+	string tab = "\t\t";
+	if (name.size() > 7)
+		tab = "\t";
+	cout << ID << "\t" << name << tab <<price<<"\t"<< quantity << "\n";
 }
 int Item::IDs = 0;

@@ -13,6 +13,8 @@ class Service
 public:
 	Service();// Конструктор по умолчанию
 	void EnterClient(string clientName);
+	void addWork();
+	void deleteWork();
 
 };
 

@@ -191,10 +191,21 @@ int ShopService::getEmployersIDs()
 ShopService::~ShopService()
 {
 	saveEmployers();
-	saveGoods(configPath["Goods"]);
+	shop.saveGoods(configPath["Goods"]);
 }
 
 string* getPathConfig(ShopService obj)
 {
 	return nullptr;
+}
+
+
+void ShopService::setup_goods()
+{
+	shop.setup_goods();
+}
+
+void ShopService::delete_goods()
+{
+	shop.delete_goods();
 }

@@ -6,6 +6,7 @@
 #include <string>
 #include "ShopService.h"
 #include "windows.h"
+#include<thread>
 
 
 Shop::Shop()
@@ -23,7 +24,14 @@ void Shop::setup_goods(string name, float price, float quantity, int ID, int sta
 
 		if (good.Name() == name && good.Price() == price)
 		{
-			good.add_quantity(quantity);
+			if (good.status == 1)
+			{
+				good.add_quantity(quantity);
+			}
+			else
+			{
+				good.status = 1;
+			}
 			flag = true;
 			break;
 		}	
@@ -104,8 +112,8 @@ void Shop::saveGoods(string file_path)
 		for (auto item: goods)
 		{
 
-			sprintf_s(tmp, 100, "%d %s %.2f %.2f\n"
-				, item.ID, item.name.data(), item.price, item.quantity);
+			sprintf_s(tmp, 100, "%d %s %.2f %.2f %d\n"
+				, item.ID, item.name.data(), item.price, item.quantity, item.status);
 			file << tmp;
 		}
 		file.close();
@@ -117,8 +125,9 @@ void Shop::saveGoods(string file_path)
 void Shop::setup_goods()
 {
 	cout << "Вывести список товаров?(д/н)\n";
+	
 	char choice = getchar();
-	choice = getchar();
+	getchar();
 	switch (choice)
 	{
 	case 'д':
@@ -130,6 +139,7 @@ void Shop::setup_goods()
 	}
 	cout << "Продолжить?(д/н)";
 	choice = getchar();
+	getchar();
 	switch (choice)
 	{
 	case 'д':
@@ -138,6 +148,7 @@ void Shop::setup_goods()
 		break;
 	default:
 		cout << "Отмена\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return;
 	}
 	string name;

@@ -37,7 +37,7 @@ void exec_IN(const char* cmd) {
 	}
 }
 
-wchar_t* exec(const char* cmd) {
+void exec(const char* cmd, wchar_t connection[]) {
 	METKA:
 	std::array<char, 128> buffer;
 	std::string result;
@@ -59,22 +59,20 @@ wchar_t* exec(const char* cmd) {
 		exec_IN("SqlLocalDB.exe start");
 		goto METKA;
 	}
-	wchar_t connection[255] = L"provider=SQLOLEDB; initial catalog=master; data source=";
 	wcscat_s(connection, 255, char2wchar(m_vecFields[0].data()));
 	wcscat_s(connection, 255, L"; Trusted_Connection=yes; ");
-	return connection;
 }
 
 SQL::SQL()
 {
-
+	wchar_t template_connection[255] = L"provider=SQLOLEDB; initial catalog=master; data source=";
 	HRESULT T = CoInitialize(NULL);
 	_ConnectionPtr pConn(__uuidof(Connection));
 	_RecordsetPtr pRs(__uuidof(Recordset));
 	//exec_IN("SqlLocalDB.exe start");
 	//_bstr_t strCnn("Data Source=(localdb)\ProjectsV12;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;");
-	wchar_t* connection = exec("SqlLocalDB.exe i MSSQLLocalDB");
-	pConn->Open(connection, L"", L"", 0);
+	exec("SqlLocalDB.exe i MSSQLLocalDB", template_connection);
+	pConn->Open(template_connection, L"", L"", 0);
 	string sqlTest = "IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'Test') BEGIN CREATE DATABASE Test END";
 	pRs = pConn->Execute(sqlTest.data() , NULL, adCmdText);
 	pRs.Release();
