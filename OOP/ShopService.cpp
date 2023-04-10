@@ -27,17 +27,14 @@ void ShopService::create_employees(string path_file)
 	fstream file(path_file, std::ios_base::in);
 	while (!file.eof())
 	{
-	
 		getline(file, line);
 		if (line == "")
 			continue;
 		sscanf_s(line.data(), "%d %s %s %s %d %d %d %d",&ID, lName, 10, fName,
 			10, mName, 20, &age, &position, &department, &status);
-		employers.push_back(Employee(ID, lName, fName, mName, age, position, department, (bool)status));
-	
+		employers.push_back(Employee(ID, lName, fName, mName, age, position, department, (bool)status));	
 	}
 	file.close();
-
 }
 
 void ShopService::getlastIDEmployees(string path_file)
@@ -85,11 +82,7 @@ void ShopService::visit_client(int type_of_visit, string clientName)
 		{
 			man.sayYourName(nameOrganization);
 		}
-
 	}
-		
-
-
 }
 
 void ShopService::addNewEmployee(string _lName, string _fName, string _mName,
@@ -158,7 +151,6 @@ void ShopService::saveEmployees()
 	char* tmp = new char[100];
 	for (auto emp : employers)
 	{
-
 		sprintf_s(tmp,100,"%d %s %s %s %d %d %d %d\n"
 			, emp.ID, emp.lName().data(), emp.fName().data(), emp.mName().data(), emp.Age(), emp.department, emp.position, emp.status);
 		file << tmp;

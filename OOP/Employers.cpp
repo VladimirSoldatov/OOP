@@ -5,11 +5,7 @@
 #include <regex>
 #include "ShopService.h"
 #include<array>
-
 using namespace std;
-
-
-
 
 void Employee::set_ID()
 {
@@ -104,7 +100,6 @@ int Employee::getIDs(string path)
 	result = strtol(m_vecFields[0].data(), NULL, 10);
 	file.close();
 	return result;
-
 }
 
 
