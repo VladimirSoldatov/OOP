@@ -1,5 +1,5 @@
 #include "Client.h"
-
+//Необходимо прописать клиента
 void Client::GenIDs()
 {
 	IDs++;
